@@ -2,4 +2,7 @@ target/
 .settings/
 .classpath
 .project
+.idea/
 src/main/java/META-INF/
+test-webauth-master.json
+gaedemo.iml
