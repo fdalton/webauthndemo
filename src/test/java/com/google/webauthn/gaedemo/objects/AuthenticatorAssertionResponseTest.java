@@ -32,7 +32,10 @@ import java.util.Arrays;
 import org.junit.Test;
 
 @SuppressWarnings("unused")
-public class AuthenticatorAssertionResponseTest {
+/**
+ * ##MANUAL## - adicionado a parte "extends TestCase" para simular um classe de testes a partir de herança
+ */
+public class AuthenticatorAssertionResponseTest extends TestCase{
   final SecureRandom random = new SecureRandom();
 
   /**
