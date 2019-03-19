@@ -38,6 +38,9 @@ import com.google.webauthn.gaedemo.objects.FidoU2fAttestationStatement;
 import com.google.webauthn.gaedemo.objects.PublicKeyCredential;
 import com.google.webauthn.gaedemo.storage.Credential;
 
+/**
+ * ##MANUAL## Multiplas excecoes em um catch - WebAuthnException adicionada na linha 152 e ResponseException adicionada na linha 107
+ */
 public class U2fServer extends Server {
 
   private static final Logger Log = Logger.getLogger(U2fServer.class.getName());
@@ -101,7 +104,7 @@ public class U2fServer extends Server {
         }
         //
       }
-    } catch (WebAuthnException e) {
+    } catch (WebAuthnException | ResponseException e) {
       throw new ServletException("Failure while verifying signature");
     }
 
@@ -139,9 +142,14 @@ public class U2fServer extends Server {
       }
     }
 
+    /**
+     * ## MANUAL ##
+     * WEBAUTHNEXCEPTION adicionada!
+     *
+     */
     try {
       verifySessionAndChallenge(attResponse, currentUser, session);
-    } catch (ResponseException e1) {
+    } catch (ResponseException | WebAuthnException e1) {
       throw new ServletException("Unable to verify session and challenge data", e1);
     }
 

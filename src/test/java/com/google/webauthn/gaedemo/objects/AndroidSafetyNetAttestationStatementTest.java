@@ -48,7 +48,7 @@ public class AndroidSafetyNetAttestationStatementTest {
       AndroidSafetyNetAttestationStatement decoded =
           AndroidSafetyNetAttestationStatement.decode(encoded);
       assertEquals(decoded, attStmt);
-    } catch (CborException | ResponseException e) {
+    } catch (CborException e) {
       fail(e.getMessage());
     }
   }
