@@ -1,4 +1,4 @@
-package com.google.webauthn.gaedemo.customTests;
+package com.google.webauthn.gaedemo.custom;
 
 import co.nstant.in.cbor.CborException;
 import co.nstant.in.cbor.model.DataItem;
@@ -6,14 +6,10 @@ import com.google.webauthn.gaedemo.crypto.Crypto;
 import com.google.webauthn.gaedemo.exceptions.WebAuthnException;
 import com.google.webauthn.gaedemo.objects.Algorithm;
 import com.google.webauthn.gaedemo.objects.AndroidSafetyNetAttestationStatement;
-import com.google.webauthn.gaedemo.objects.AttestationData;
 import com.google.webauthn.gaedemo.objects.RsaKey;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.bouncycastle.util.encoders.Hex;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 
 import static org.junit.Assert.fail;
