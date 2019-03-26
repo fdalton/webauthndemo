@@ -6,9 +6,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.webauthn.gaedemo.exceptions.ResponseException;
-import com.google.webauthn.gaedemo.objects.AuthenticatorAssertionResponse;
-import com.google.webauthn.gaedemo.objects.AuthenticatorData;
-import com.google.webauthn.gaedemo.objects.CollectedClientData;
+import com.google.webauthn.gaedemo.objects.*;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
@@ -108,6 +108,26 @@ public class ExtendsTest extends TestCase {
         assertTrue(Arrays.equals(decoded.signature, signature));
         assertEquals(decoded.getClientData(), clientJson);
         assertEquals(decoded.getAuthenticatorData(), authData);
+    }
+
+    @Test
+    @Ignore
+    public void testEncode() {
+        EccKey testKey = new EccKey();
+        testKey.alg = Algorithm.ES256;
+        testKey.x = "testX".getBytes(StandardCharsets.UTF_8);
+        testKey.y = "testY".getBytes(StandardCharsets.UTF_8);
+        try {
+            CredentialPublicKey decodedCpk = CredentialPublicKey.decode(testKey.encode());
+            assertTrue(decodedCpk instanceof EccKey);
+            assertEquals(decodedCpk, testKey);
+            testKey.alg = Algorithm.PS256;
+            decodedCpk = CredentialPublicKey.decode(testKey.encode());
+            assertTrue(!(decodedCpk instanceof EccKey));
+            fail("Fail Inserido acima do catch");
+        } catch (CborException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
 

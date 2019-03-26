@@ -43,7 +43,7 @@ import com.google.webauthn.gaedemo.storage.Credential;
 
 import co.nstant.in.cbor.CborException;
 
-
+//##MODIFICADA##
 public class PackedServer extends Server {
 
   private static final Logger Log = Logger.getLogger(PackedServer.class.getName());
@@ -86,6 +86,8 @@ public class PackedServer extends Server {
   }
 
   /**
+   *
+   * ##MODIFICADA##
    * @param cred
    * @param currentUser
    * @param session
@@ -96,8 +98,11 @@ public class PackedServer extends Server {
       String session, String origin) throws ServletException {
 
     if (!(cred.getResponse() instanceof AuthenticatorAttestationResponse)) {
-      throw new ServletException("Invalid response structure");
+      //THROW INDIRETO ADICIONADO MANUALMENTE
+      ServletException exc = new ServletException("Invalid response structure");
+      throw exc;
     }
+
 
     AuthenticatorAttestationResponse attResponse =
         (AuthenticatorAttestationResponse) cred.getResponse();
