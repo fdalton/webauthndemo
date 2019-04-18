@@ -110,25 +110,6 @@ public class ExtendsTest extends TestCase {
         assertEquals(decoded.getAuthenticatorData(), authData);
     }
 
-    @Test
-    @Ignore
-    public void testEncode() {
-        EccKey testKey = new EccKey();
-        testKey.alg = Algorithm.ES256;
-        testKey.x = "testX".getBytes(StandardCharsets.UTF_8);
-        testKey.y = "testY".getBytes(StandardCharsets.UTF_8);
-        try {
-            CredentialPublicKey decodedCpk = CredentialPublicKey.decode(testKey.encode());
-            assertTrue(decodedCpk instanceof EccKey);
-            assertEquals(decodedCpk, testKey);
-            testKey.alg = Algorithm.PS256;
-            decodedCpk = CredentialPublicKey.decode(testKey.encode());
-            assertTrue(!(decodedCpk instanceof EccKey));
-            fail("Fail Inserido acima do catch");
-        } catch (CborException e) {
-            System.out.println(e.getMessage());
-        }
-    }
 }
 
 
