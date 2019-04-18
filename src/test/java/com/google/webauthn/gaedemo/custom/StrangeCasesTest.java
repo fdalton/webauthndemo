@@ -9,6 +9,7 @@ import org.bouncycastle.util.encoders.Hex;
 import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 
@@ -114,6 +115,26 @@ public class StrangeCasesTest {
             assertTrue(!(decodedCpk instanceof EccKey));
             fail("Fail Inserido acima do catch"); //indicativo de teste da CborException
         } catch (CborException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    @Ignore
+    public void testEncodeTwo() {
+        EccKey testKey = new EccKey();
+        testKey.alg = Algorithm.ES256;
+        testKey.x = "testX".getBytes(StandardCharsets.UTF_8);
+        testKey.y = "testY".getBytes(StandardCharsets.UTF_8);
+        try {
+            CredentialPublicKey decodedCpk = CredentialPublicKey.decode(testKey.encode());
+            assertTrue(decodedCpk instanceof EccKey);
+            assertEquals(decodedCpk, testKey);
+            testKey.alg = Algorithm.PS256;
+            decodedCpk = CredentialPublicKey.decode(testKey.encode());
+            assertTrue(!(decodedCpk instanceof EccKey));
+            fail("Fail Inserido acima do catch"); //indicativo de teste da CborException
+        } catch (CborException | IOException e) {
             System.out.println(e.getMessage());
         }
     }
